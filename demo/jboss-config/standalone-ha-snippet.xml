@@ -1,0 +1,40 @@
+<!-- TCP use for jgroups-3212-tcp.pcap -->
+<subsystem xmlns="urn:jboss:domain:jgroups:1.1" default-stack="tcp">
+    <stack name="tcp">
+        <transport type="TCP" socket-binding="jgroups-tcp"/>
+        <protocol type="MPING" socket-binding="jgroups-mping"/>
+        <protocol type="MERGE2"/>
+        <protocol type="FD_SOCK" socket-binding="jgroups-tcp-fd"/>
+        <protocol type="FD"/>
+        <protocol type="VERIFY_SUSPECT"/>
+        <protocol type="pbcast.NAKACK"/>
+        <protocol type="UNICAST2"/>
+        <protocol type="pbcast.STABLE"/>
+        <protocol type="pbcast.GMS"/>
+        <protocol type="UFC"/>
+        <protocol type="MFC"/>
+        <protocol type="FRAG2"/>
+        <protocol type="RSVP"/>
+    </stack>
+</subsystem>
+
+
+<!-- UDP use for jgroups-3212-udp.pcap-->
+<subsystem xmlns="urn:jboss:domain:jgroups:1.1" default-stack="udp">
+         <stack name="udp">
+        <transport type="UDP" socket-binding="jgroups-udp"/>
+        <protocol type="PING"/>
+        <protocol type="MERGE3"/>
+        <protocol type="FD_SOCK" socket-binding="jgroups-udp-fd"/>
+        <protocol type="FD"/>
+        <protocol type="VERIFY_SUSPECT"/>
+        <protocol type="pbcast.NAKACK"/>
+        <protocol type="UNICAST2"/>
+        <protocol type="pbcast.STABLE"/>
+        <protocol type="pbcast.GMS"/>
+        <protocol type="UFC"/>
+        <protocol type="MFC"/>
+        <protocol type="FRAG2"/>
+        <protocol type="RSVP"/>
+    </stack>
+</subsystem>
