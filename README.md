@@ -34,7 +34,7 @@ Enable the plugin
 
 Add following line to the init.lua
 
-`dofile("jgroups-wireshark-dissector/jgroups-dissector.lua")`
+`dofile("jgroups-dissector/jgroups-dissector.lua")`
 
 
 (Optional) Build and Install Wireshark 1.11.3 
