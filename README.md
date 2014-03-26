@@ -36,6 +36,7 @@ Add following line to the init.lua
 
 `dofile("jgroups-dissector/jgroups-dissector.lua")`
 
+**MEMO**: /usr/local/share/wireshark is not appropriate directory. But until this [bugzilla](https://bugs.wireshark.org/bugzilla/show_bug.cgi?id=9926) is fixed, we use it.
 
 (Optional) Build and Install Wireshark 1.11.3 
 --------------------------
