@@ -28,6 +28,8 @@ Enable the plugin
 
 **MEMO**: If you are not using wireshark 1.11.3, install it first. See the following Build and Install section.
 
+Just copy dissector files to your Wireshark global plugins directory.
+
     sudo cp -r jgroups-dissector /PATH/TO/YOUR/WIRESHARK/GLOBAL_PLUGIN/
     (eg. sudo cp -r jgroups-dissector /usr/local/lib/wireshark/plugins/1.11.3/)
 
