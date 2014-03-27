@@ -31,11 +31,7 @@ Enable the plugin
     sudo cp -r jgroups-dissector /PATH/TO/YOUR/WIRESHARK/GLOBAL_PLUGIN/
     (eg. sudo cp -r jgroups-dissector /usr/local/lib/wireshark/plugins/1.11.3/)
 
-Add following line to the init.lua
-
-`dofile("jgroups-dissector/jgroups-dissector.lua")`
-
-(Optional) Build and Install Wireshark 1.11.3 
+(Optional) Build and Install Wireshark 1.11.3
 --------------------------
 
 #### Fedora 20
