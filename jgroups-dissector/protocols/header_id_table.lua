@@ -23,6 +23,8 @@
 --------------------------------------------------
 local header_id_table = {}
 
+plugin_path = Dir.global_plugins_path()
+package.path = package.path ..  ";" .. plugin_path .. "/jgroups-dissector/?.lua"
 
 PingHeader    = require "protocols.PingHeader"
 FD_SOCK       = require "protocols.FD_SOCK"
@@ -36,7 +38,7 @@ GMS           = require "protocols.pbcast.GMS"
 STABLE        = require "protocols.pbcast.STABLE"
 NakAckHeader  = require "protocols.pbcast.NakAckHeader"
 RequestCorrelator = require "blocks.RequestCorrelator"
- 
+
 header_id_table["PING"]     = PingHeader.writeTo
 header_id_table["MPING"]    = PingHeader.writeTo
 header_id_table["FD_SOCK"]  = FD_SOCK.writeTo

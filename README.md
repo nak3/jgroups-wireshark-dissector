@@ -28,15 +28,12 @@ Enable the plugin
 
 **MEMO**: If you are not using wireshark 1.11.3, install it first. See the following Build and Install section.
 
-    sudo cp -r jgroups-dissector /usr/local/share/wireshark
-    cd /usr/local/share/wireshark
-    (Edit) init.lua
+    sudo cp -r jgroups-dissector /PATH/TO/YOUR/WIRESHARK/GLOBAL_PLUGIN/
+    (eg. sudo cp -r jgroups-dissector /usr/local/lib/wireshark/plugins/1.11.3/)
 
 Add following line to the init.lua
 
 `dofile("jgroups-dissector/jgroups-dissector.lua")`
-
-**MEMO**: /usr/local/share/wireshark is not appropriate directory. But until this [bugzilla](https://bugs.wireshark.org/bugzilla/show_bug.cgi?id=9926) is fixed, we use it.
 
 (Optional) Build and Install Wireshark 1.11.3 
 --------------------------

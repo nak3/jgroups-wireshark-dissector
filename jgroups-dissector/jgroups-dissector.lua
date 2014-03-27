@@ -21,11 +21,13 @@
 --------------------------------------------------
 -- @@Global setting@@ --
 --------------------------------------------------
-path = datafile_path('jgroups-dissector')
-package.path = path .. "/?.lua"
+
+
+--
+--package.path = package.path ..  "; " .. plugin_path .. "/jgroups-dissector/?.lua"
 
 do
-    dofile(path .. "/head.lua")
+    dofile(plugin_path .. "/jgroups-dissector/head.lua")
 
     local jgroups_proto = Proto("jgroups_proto", "JGroups packet")
 
@@ -194,6 +196,7 @@ do
     -- jgroups_proto.dissector --
     --------------------------------------------------
     function jgroups_proto.dissector(buffer,pinfo,tree)
+
         local offset = 0
         subtree = tree:add(jgroups_proto, buffer(), "JGroups packet data")
 
