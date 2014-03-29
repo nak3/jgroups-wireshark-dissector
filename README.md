@@ -14,7 +14,7 @@ See: `supported_version.lua`
 
 Environment
 --------------------------
-* wireshark 1.11.3 (tested wireshark-1.11.3-rc1-2076-gda83ead from master)
+* wireshark 1.11.3 (tested wireshark-1.11.3-rc1-2148-g7785dd0 from master)
 * lua > 5.2
 
 
@@ -30,14 +30,13 @@ Enable the plugin
 
 Just copy dissector files to your Wireshark global plugins directory.
 
-    sudo cp -r jgroups-dissector /PATH/TO/YOUR/WIRESHARK/GLOBAL_PLUGIN/
-    (eg. sudo cp -r jgroups-dissector /usr/local/lib/wireshark/plugins/1.11.3/)
+    cp -r jgroups-dissector /PATH/TO/YOUR/WIRESHARK/PERSONAL_PLUGIN/
+    (eg. cp -r jgroups-dissector /home/knakayam/.wireshark/plugins/
 
 (Optional) Build and Install Wireshark 1.11.3
 --------------------------
 
 #### Fedora 20
-
 
 This is a build and istall sample process.
 

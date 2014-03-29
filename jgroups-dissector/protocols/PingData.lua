@@ -27,12 +27,12 @@ local PingData = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-PingData.writeTo = function(buffer,pinfo,tree,offset)
+PingData.writeTo = function(buffer,pinfo,subtree,offset)
     Util = require "util.Util"
 
-	offset = Util.writeAddress(buffer,pinfo,tree,offset)
-	offset = Util.writeView(buffer,pinfo,tree,offset)
-	offset = Util.writeViewId(buffer,pinfo,tree,offset)
+	offset = Util.writeAddress(buffer,pinfo,subtree,offset)
+	offset = Util.writeView(buffer,pinfo,subtree,offset)
+	offset = Util.writeViewId(buffer,pinfo,subtree,offset)
 
 	-- is_server flag
 	local jgroups_is_server_flag_range = buffer(offset,1)
@@ -41,8 +41,8 @@ PingData.writeTo = function(buffer,pinfo,tree,offset)
 	subtree:add(f_jgroups_is_server_flag, jgroups_is_server_flag_range, jgroups_is_server_flag)
 	offset = offset + 1
 
-	offset = Util.writeString(buffer,pinfo,tree,offset)
-	offset = Util.writeAddresses(buffer,pinfo,tree,offset)
+	offset = Util.writeString(buffer,pinfo,subtree,offset)
+	offset = Util.writeAddresses(buffer,pinfo,subtree,offset)
 
 	return offset
 end

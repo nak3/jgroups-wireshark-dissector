@@ -46,7 +46,7 @@ end
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-NakAckHeader.writeTo =  function(buffer,pinfo,tree,offset)
+NakAckHeader.writeTo =  function(buffer,pinfo,subtree,offset)
     Util = require "util.Util"
     local jgroups_NakAckHeaderType_Type_range = buffer(offset,1)
     local jgroups_NakAckHeaderType_Type = NakAckHeaderType2String(jgroups_NakAckHeaderType_Type_range:uint())
@@ -56,10 +56,10 @@ NakAckHeader.writeTo =  function(buffer,pinfo,tree,offset)
     if jgroups_NakAckHeaderType_Type == "MSG" then
         -- nothing to do
     elseif jgroups_NakAckHeaderType_Type == "XMIT_RSP" then
-        offset = Util.writeLong(buffer,pinfo,tree,offset)
+        offset = Util.writeLong(buffer,pinfo,subtree,offset)
     elseif jgroups_NakAckHeaderType_Type == "XMIT_REQ" then
-        offset = Util.writeStreamable(buffer,pinfo,tree,offset,"Range")
-        offset = Util.writeAddress(buffer,pinfo,tree,offset)
+        offset = Util.writeStreamable(buffer,pinfo,subtree,offset,"Range")
+        offset = Util.writeAddress(buffer,pinfo,subtree,offset)
     end
 
     return offset

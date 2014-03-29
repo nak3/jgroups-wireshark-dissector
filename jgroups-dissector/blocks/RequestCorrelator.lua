@@ -27,7 +27,7 @@ local RequestCorrelator = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-RequestCorrelator.writeTo = function(buffer,pinfo,tree,offset)
+RequestCorrelator.writeTo = function(buffer,pinfo,subtree,offset)
 		Util = require "util.Util"
 
    		local jgroups_RequestCorrelator_type_range = buffer(offset,1)
@@ -35,7 +35,7 @@ RequestCorrelator.writeTo = function(buffer,pinfo,tree,offset)
 		subtree:add(f_jgroups_RequestCorrelator_type, jgroups_RequestCorrelator_type_range, jgroups_RequestCorrelator_type)
 		offset = offset + 1
 
-	    offset = Util.writeLong(buffer,pinfo,tree,offset)
+	    offset = Util.writeLong(buffer,pinfo,subtree,offset)
 
    		local jgroups_rsp_expected_flag_range = buffer(offset,1)
 		local jgroups_rsp_expected_flag = Boolean(jgroups_rsp_expected_flag_range:uint())

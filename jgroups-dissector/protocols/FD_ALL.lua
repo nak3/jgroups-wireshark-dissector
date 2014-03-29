@@ -27,7 +27,7 @@ local FD_ALL = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-FD_ALL.writeTo = function(buffer,pinfo,tree,offset)
+FD_ALL.writeTo = function(buffer,pinfo,subtree,offset)
    return offset
 end
 

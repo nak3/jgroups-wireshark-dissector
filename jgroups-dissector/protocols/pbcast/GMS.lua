@@ -70,7 +70,7 @@ end
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-GMS.writeTo = function(buffer,pinfo,tree,offset)
+GMS.writeTo = function(buffer,pinfo,subtree,offset)
 		Util = require "util.Util"
 		
 		local jgroups_GMS_type_range = buffer(offset,1)
@@ -83,14 +83,14 @@ GMS.writeTo = function(buffer,pinfo,tree,offset)
 		subtree:add(f_jgroups_isMergeViewFlag, jgroups_isMergeViewFlag_range, jgroups_isMergeViewFlag)
 		offset = offset + 1
 
-		offset = Util.writeStreamable(buffer,pinfo,tree,offset,"View")
+		offset = Util.writeStreamable(buffer,pinfo,subtree,offset,"View")
 
-		offset = Util.writeAddress(buffer,pinfo,tree,offset)
-		offset = Util.writeAddresses(buffer,pinfo,tree,offset)
+		offset = Util.writeAddress(buffer,pinfo,subtree,offset)
+		offset = Util.writeAddresses(buffer,pinfo,subtree,offset)
 		
-		offset = Util.writeStreamable(buffer,pinfo,tree,offset,"JoinRsp")
-		offset = Util.writeStreamable(buffer,pinfo,tree,offset,"Digest")
-		offset = Util.writeStreamable(buffer,pinfo,tree,offset,"MergeId")
+		offset = Util.writeStreamable(buffer,pinfo,subtree,offset,"JoinRsp")
+		offset = Util.writeStreamable(buffer,pinfo,subtree,offset,"Digest")
+		offset = Util.writeStreamable(buffer,pinfo,subtree,offset,"MergeId")
 
    		local jgroups_merge_rejected_flag_range = buffer(offset,1)
 		local jgroups_merge_rejected_flag = Boolean(jgroups_merge_rejected_flag_range:uint())

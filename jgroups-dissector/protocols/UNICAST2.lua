@@ -48,7 +48,7 @@ end
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-UNICAST2.writeTo = function(buffer,pinfo,tree,offset)
+UNICAST2.writeTo = function(buffer,pinfo,subtree,offset)
 
     local jgroups_Unicast2_type_range = buffer(offset,1)
     local jgroups_Unicast2_type = UNICAST2Type(jgroups_Unicast2_type_range:uint())
@@ -57,7 +57,7 @@ UNICAST2.writeTo = function(buffer,pinfo,tree,offset)
 
     if jgroups_Unicast2_type == "DATA" then
         Util = require "util.Util"
-        offset = Util.writeLong(buffer,pinfo,tree,offset)
+        offset = Util.writeLong(buffer,pinfo,subtree,offset)
 
         -- conn_id --
         local jgroups_conn_id_range = buffer(offset,2)
@@ -76,7 +76,7 @@ UNICAST2.writeTo = function(buffer,pinfo,tree,offset)
 
     elseif jgroups_Unicast2_type == "STABLE" then
         Util = require "util.Util"
-        offset = Util.writeLongSequence(buffer,pinfo,tree,offset)
+        offset = Util.writeLongSequence(buffer,pinfo,subtree,offset)
 
         -- conn_id --
         local jgroups_conn_id_range = buffer(offset,2)
@@ -86,11 +86,11 @@ UNICAST2.writeTo = function(buffer,pinfo,tree,offset)
 
     elseif jgroups_Unicast2_type == "SEND_FIRSTSEQNO" then
         Util = require "util.Util"
-        offset = Util.writeLong(buffer,pinfo,tree,offset)
+        offset = Util.writeLong(buffer,pinfo,subtree,offset)
 
     elseif jgroups_Unicast2_type == "ACK" then
         Util = require "util.Util"
-        offset = Util.writeLong(buffer,pinfo,tree,offset)
+        offset = Util.writeLong(buffer,pinfo,subtree,offset)
 
         -- conn_id --
         local jgroups_conn_id_range = buffer(offset,1)

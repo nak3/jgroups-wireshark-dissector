@@ -27,7 +27,7 @@ local Message = {}
 --------------------------------------------------
 -- wrietHeader --
 --------------------------------------------------
-function writeHeader(buffer,pinfo,tree,offset)
+function writeHeader(buffer,pinfo,subtree,offset)
     local jgroups_header_id_range = buffer(offset,2)
     local jgroups_header_id = header_id(jgroups_header_id_range:uint())
     subtree:add(f_jgroups_header_id, jgroups_header_id_range, jgroups_header_id)
@@ -47,7 +47,7 @@ function writeHeader(buffer,pinfo,tree,offset)
         return "not_supported"
     end
 
-    offset = header_id_table[jgroups_header_id](buffer,pinfo,tree,offset)
+    offset = header_id_table[jgroups_header_id](buffer,pinfo,subtree,offset)
     
     return offset
 end
@@ -56,7 +56,7 @@ end
 --------------------------------------------------
 -- wrietTo --
 --------------------------------------------------
-function writeTo(buffer,pinfo,tree,offset,p)
+function writeTo(buffer,pinfo,subtree,offset,p)
     Util = require "util.Util"
     --for TCP
     if p == "tcp" then
@@ -66,6 +66,7 @@ function writeTo(buffer,pinfo,tree,offset,p)
     local jgroups_version_range = buffer(offset,2)
     local jgroups_version = version_decode(jgroups_version_range:uint())
     subtree:add(f_jgroups_version, jgroups_version_range, jgroups_version)
+
     offset = offset + 2
 
     local jgroups_mcast_flag_range = buffer(offset,1)
@@ -85,11 +86,11 @@ function writeTo(buffer,pinfo,tree,offset,p)
     offset = offset + 2
 
     if bit32.band(jgroups_leading_bits[1]) == 1 then
-        offset = Util.writeAddress(buffer,pinfo,tree,offset)
+        offset = Util.writeAddress(buffer,pinfo,subtree,offset)
     end
 
     if bit32.band(jgroups_leading_bits[2]) == 1 then
-        offset = Util.writeAddress(buffer,pinfo,tree,offset)
+        offset = Util.writeAddress(buffer,pinfo,subtree,offset)
     end
 
     -- buffer -- TODO not string
@@ -111,7 +112,7 @@ function writeTo(buffer,pinfo,tree,offset,p)
     offset = offset + 2
 
     for i=1,tonumber(jgroups_headers_size) do
-        offset = writeHeader(buffer,pinfo,tree,offset)
+        offset = writeHeader(buffer,pinfo,subtree,offset)
         if offset == "not_supported" then
             break
         end
@@ -123,12 +124,12 @@ end
 --------------------------------------------------
 -- @@module table@@ --
 --------------------------------------------------
-function Message.writeHeader(buffer,pinfo,tree,offset)
-    return writeHeader(buffer,pinfo,tree,offset)
+function Message.writeHeader(buffer,pinfo,subtree,offset)
+    return writeHeader(buffer,pinfo,subtree,offset)
 end
 
-function Message.writeTo(buffer,pinfo,tree,offset,p)
-    return writeTo(buffer,pinfo,tree,offset,p)
+function Message.writeTo(buffer,pinfo,subtree,offset,p)
+    return writeTo(buffer,pinfo,subtree,offset,p)
 end
 
 

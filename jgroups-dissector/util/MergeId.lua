@@ -27,8 +27,8 @@ MergeId = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-MergeId.writeTo = function(buffer,pinfo,tree,offset)
-    offset = Util.writeAddress(buffer,pinfo,tree,offset)
+MergeId.writeTo = function(buffer,pinfo,subtree,offset)
+    offset = Util.writeAddress(buffer,pinfo,subtree,offset)
 
     local jgroups_merge_id_range = buffer(offset,4)
     local jgroups_merge_id = jgroups_merge_id:uint()

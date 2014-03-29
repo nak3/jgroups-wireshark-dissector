@@ -27,7 +27,7 @@ local UUID = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-UUID.writeTo = function(buffer,pinfo,tree,offset)
+UUID.writeTo = function(buffer,pinfo,subtree,offset)
     -- ** jgroups least significant bits ** --
     local jgroups_least_sig_bits_range = buffer(offset,8)
     local jgroups_least_sig_bits = jgroups_least_sig_bits_range:uint64()

@@ -42,7 +42,7 @@ end
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-STABLE.writeTo = function(buffer,pinfo,tree,offset)
+STABLE.writeTo = function(buffer,pinfo,subtree,offset)
     Util = require "util.Util"
     obj = "Digest"
 
@@ -51,7 +51,7 @@ STABLE.writeTo = function(buffer,pinfo,tree,offset)
     subtree:add(f_jgroups_pbcastStable_type, jgroups_pbcastStable_type_range, jgroups_pbcastStable_type)
     offset = offset + 4
     
-    offset = Util.writeStreamable(buffer,pinfo,tree,offset,obj)
+    offset = Util.writeStreamable(buffer,pinfo,subtree,offset,obj)
     
     return offset
 end

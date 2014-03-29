@@ -48,15 +48,15 @@ end
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-FD_SOCK.writeTo = function(buffer,pinfo,tree,offset)
+FD_SOCK.writeTo = function(buffer,pinfo,subtree,offset)
     Util = require "util.Util"
     local jgroups_FD_SOCK_range = buffer(offset,1)
     local jgroups_FD_SOCK = FD_SOCK_type(jgroups_FD_SOCK_range:uint())
     subtree:add(f_jgroups_FD_SOCK, jgroups_FD_SOCK_range, jgroups_FD_SOCK)
     offset = offset + 1
 
-    offset = Util.writeAddress(buffer,pinfo,tree,offset)
-    offset = Util.writeStreamable(buffer,pinfo,tree,offset,"IpAddress")
+    offset = Util.writeAddress(buffer,pinfo,subtree,offset)
+    offset = Util.writeStreamable(buffer,pinfo,subtree,offset,"IpAddress")
     
     local jgroups_cachedAddrs_size_range = buffer(offset,4)
     local jgroups_cachedAddrs_size = jgroups_cachedAddrs_size_range:uint()
@@ -64,8 +64,8 @@ FD_SOCK.writeTo = function(buffer,pinfo,tree,offset)
     offset = offset + 4
 
     for i=1,tonumber(jgroups_cachedAddrs_size) do
-        offset = Util.writeAddress(buffer,pinfo,tree,offset)
-        offset = Util.writeStreamable(buffer,pinfo,tree,offset,"IpAddress")          
+        offset = Util.writeAddress(buffer,pinfo,subtree,offset)
+        offset = Util.writeStreamable(buffer,pinfo,subtree,offset,"IpAddress")          
     end
 
     local jgroups_mbrs_size_range = buffer(offset,4)
@@ -73,7 +73,7 @@ FD_SOCK.writeTo = function(buffer,pinfo,tree,offset)
     subtree:add(f_jgroups_mbrs_size, jgroups_mbrs_size_range, jgroups_mbrs_size)
     offset = offset + 4
     for i=1,tonumber(jgroups_mbrs_size) do
-        offset = Util.writeAddress(buffer,pinfo,tree,offset)
+        offset = Util.writeAddress(buffer,pinfo,subtree,offset)
     end
 
     return offset

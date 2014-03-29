@@ -27,7 +27,7 @@ TpHeader = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-TpHeader.writeTo = function(buffer,pinfo,tree,offset)
+TpHeader.writeTo = function(buffer,pinfo,subtree,offset)
     local jgroups_word_size_range = buffer(offset,2)
     local jgroups_word_size = jgroups_word_size_range:uint()
     subtree:add(f_jgroups_word_size, jgroups_word_size_range, jgroups_word_size)

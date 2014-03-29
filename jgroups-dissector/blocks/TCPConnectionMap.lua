@@ -27,14 +27,14 @@ local TCPConnectionMap = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-function TCPConnectionMap.sendLocalAddress(buffer,pinfo,tree,offset)
+function TCPConnectionMap.sendLocalAddress(buffer,pinfo,subtree,offset)
     local jgroups_version_range = buffer(offset,2)
     local jgroups_version = version_decode(jgroups_version_range:uint())
     subtree:add(f_jgroups_version, jgroups_version_range, jgroups_version)
     offset = offset + 2
 
     local IpAddress = require "stack.IpAddress"
-    offset = IpAddress.writeTo(buffer,pinfo,tree,offset)
+    offset = IpAddress.writeTo(buffer,pinfo,subtree,offset)
     return offset
 end
 

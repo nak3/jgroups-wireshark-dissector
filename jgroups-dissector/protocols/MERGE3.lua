@@ -27,7 +27,7 @@ MERGE3 = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-MERGE3.writeTo  = function(buffer,pinfo,tree,offset)
+MERGE3.writeTo  = function(buffer,pinfo,subtree,offset)
     Util = require "util.Util"
 
     local jgroups_MERGE3_type_range = buffer(offset,1)
@@ -35,10 +35,10 @@ MERGE3.writeTo  = function(buffer,pinfo,tree,offset)
     subtree:add(f_jgroups_MERGE3_type, jgroups_MERGE3_type_range, jgroups_MERGE3_type)
     offset = offset + 1
 
-    offset = Util.writeViewId(buffer,pinfo,tree,offset)
-    offset = Util.writeView(buffer,pinfo,tree,offset)
-    offset = Util.writeString(buffer,pinfo,tree,offset)
-    offset = Util.writeAddresses(buffer,pinfo,tree,offset)
+    offset = Util.writeViewId(buffer,pinfo,subtree,offset)
+    offset = Util.writeView(buffer,pinfo,subtree,offset)
+    offset = Util.writeString(buffer,pinfo,subtree,offset)
+    offset = Util.writeAddresses(buffer,pinfo,subtree,offset)
 
     return offset
 end

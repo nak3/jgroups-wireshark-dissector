@@ -43,7 +43,7 @@ end
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-PingHeader.writeTo = function (buffer,pinfo,tree,offset)
+PingHeader.writeTo = function (buffer,pinfo,subtree,offset)
    Util = require "util.Util"
 
    local jgroups_PingHeader_type_range = buffer(offset,1)
@@ -51,9 +51,9 @@ PingHeader.writeTo = function (buffer,pinfo,tree,offset)
    subtree:add(f_jgroups_PingHeader_type, jgroups_PingHeader_type_range, jgroups_PingHeader_type)
    offset = offset + 1
 
-   offset = Util.writeStreamable(buffer,pinfo,tree,offset,"Ping")
-   offset = Util.writeString(buffer,pinfo,tree,offset)
-   offset = Util.writeViewId(buffer,pinfo,tree,offset)
+   offset = Util.writeStreamable(buffer,pinfo,subtree,offset,"Ping")
+   offset = Util.writeString(buffer,pinfo,subtree,offset)
+   offset = Util.writeViewId(buffer,pinfo,subtree,offset)
 
    return offset
 end

@@ -27,11 +27,11 @@ local SiteUUID = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-SiteUUID.writeTo = function(buffer,pinfo,tree,offset)
+SiteUUID.writeTo = function(buffer,pinfo,subtree,offset)
 		Util = require "util.Util"
 
-	    offset = UUID.writeTo(buffer,pinfo,tree,offset)
-		offset = Util.writeString(buffer,pinfo,tree,offset)
+	    offset = UUID.writeTo(buffer,pinfo,subtree,offset)
+		offset = Util.writeString(buffer,pinfo,subtree,offset)
 
    		local jgroups_site_range = buffer(offset,2)
 		local jgroups_site = jgroups_site_range:uint()

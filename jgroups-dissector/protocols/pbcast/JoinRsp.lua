@@ -47,7 +47,7 @@ end
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-JoinRsp.writeTo = function(buffer,pinfo,tree,offset)
+JoinRsp.writeTo = function(buffer,pinfo,subtree,offset)
 	Util = require "util.Util"
 	local jgroups_JoinRsp_Type_range = buffer(offset,1)
 	b_JoinRspType = toBits(jgroups_JoinRsp_Type_range:uint(),3)
@@ -58,14 +58,14 @@ JoinRsp.writeTo = function(buffer,pinfo,tree,offset)
 	if bit32.band(b_JoinRspType[1]) == 1 then
 		-- members size
 		ViewId = require "ViewId"
-		offset = ViewId.writeTo(buffer,pinfo,tree,offset)
+		offset = ViewId.writeTo(buffer,pinfo,subtree,offset)
 		jgroups_member_size_range = buffer(offset,2)
 		jgroups_member_size = jgroups_member_size_range:uint()
 		subtree:add(f_jgroups_member_size, jgroups_member_size_range, jgroups_member_size)
 		offset = offset + 2
 		-- for members writeAddress
 		for i=1,tonumber(jgroups_member_size) do
-            offset = Util.writeAddress(buffer,pinfo,tree,offset)
+            offset = Util.writeAddress(buffer,pinfo,subtree,offset)
 		end
 	end
 
@@ -73,7 +73,7 @@ JoinRsp.writeTo = function(buffer,pinfo,tree,offset)
 		bit32.band(b_JoinRspType[1]) == 1
 	then
 		for i=1,tonumber(jgroups_member_size) do
-            offset = Util.writeLongSequence(buffer,pinfo,tree,offset)
+            offset = Util.writeLongSequence(buffer,pinfo,subtree,offset)
 		end
 	end
 

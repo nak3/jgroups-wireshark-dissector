@@ -46,7 +46,7 @@ end
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-RSVP.writeTo = function(buffer,pinfo,tree,offset)
+RSVP.writeTo = function(buffer,pinfo,subtree,offset)
     local jgroups_RSVP_type_range = buffer(offset,1)
     local jgroups_RSVP_type = RSVPtype2String(jgroups_RSVP_type_range:uint())
     subtree:add(f_jgroups_RSVP_type, jgroups_RSVP_type_range, jgroups_RSVP_type)

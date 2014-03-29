@@ -45,7 +45,7 @@ end
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-FD.writeTo = function(buffer,pinfo,tree,offset)
+FD.writeTo = function(buffer,pinfo,subtree,offset)
     Util = require "util.Util"
 
     local jgroups_FD_type_range = buffer(offset,1)
@@ -53,8 +53,8 @@ FD.writeTo = function(buffer,pinfo,tree,offset)
     subtree:add(f_jgroups_FD_type, jgroups_FD_type_range, jgroups_FD_type)
     offset = offset + 1
 
-    offset = Util.writeAddresses(buffer,pinfo,tree,offset)
-    offset = Util.writeAddress(buffer,pinfo,tree,offset)
+    offset = Util.writeAddresses(buffer,pinfo,subtree,offset)
+    offset = Util.writeAddress(buffer,pinfo,subtree,offset)
 
     return offset
 end

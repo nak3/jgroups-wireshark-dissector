@@ -27,11 +27,11 @@ local View = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-View.writeTo = function(buffer,pinfo,tree,offset)
+View.writeTo = function(buffer,pinfo,subtree,offset)
     Util = require "util.Util"
     ViewId = require "ViewId"
-    offset = ViewId.writeTo(buffer,pinfo,tree,offset)
-    offset = Util.writeAddresses(buffer,pinfo,tree,offset)
+    offset = ViewId.writeTo(buffer,pinfo,subtree,offset)
+    offset = Util.writeAddresses(buffer,pinfo,subtree,offset)
     return offset
 end
 

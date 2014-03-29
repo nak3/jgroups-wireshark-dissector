@@ -27,7 +27,7 @@ local Bits = {}
 --------------------------------------------------
 -- writeLong --
 --------------------------------------------------
-Bits.writeLong = function(buffer,pinfo,tree,offset)
+Bits.writeLong = function(buffer,pinfo,subtree,offset)
 
     local jgroups_writeLong_needed_bytes_range = buffer(offset,1)
     local jgroups_writeLong_needed_bytes = jgroups_writeLong_needed_bytes_range:uint()
@@ -48,7 +48,7 @@ end
 --------------------------------------------------
 -- writeString --
 --------------------------------------------------
-Bits.writeString = function(buffer,pinfo,tree,offset)
+Bits.writeString = function(buffer,pinfo,subtree,offset)
     local jgroups_byte_flag_range = buffer(offset,2)
     local jgroups_byte_flag_b = jgroups_byte_flag_range:uint()
     local jgroups_byte_flag   = Boolean(jgroups_byte_flag_b)

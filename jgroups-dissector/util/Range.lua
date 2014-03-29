@@ -27,8 +27,8 @@ Range = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-Range.writeTo = function(buffer,pinfo,tree,offset)
-      offset = Util.writeLongSequence(buffer,pinfo,tree,offset)
+Range.writeTo = function(buffer,pinfo,subtree,offset)
+      offset = Util.writeLongSequence(buffer,pinfo,subtree,offset)
 	  return offset
 end
 

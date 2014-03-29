@@ -27,7 +27,7 @@ local IpAddress = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-IpAddress.writeTo = function (buffer,pinfo,tree,offset)
+IpAddress.writeTo = function (buffer,pinfo,subtree,offset)
     local jgroups_IpAddress_size_range = buffer(offset,1)
     local jgroups_IpAddress_size = jgroups_IpAddress_size_range:uint()
     subtree:add(f_jgroups_IpAddress_size, jgroups_IpAddress_size_range, jgroups_IpAddress_size)

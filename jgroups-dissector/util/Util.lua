@@ -27,7 +27,7 @@ Util = {}
 --------------------------------------------------
 -- writeAddress --
 --------------------------------------------------
-Util.writeAddress = function(buffer,pinfo,tree,offset)
+Util.writeAddress = function(buffer,pinfo,subtree,offset)
     local jgroups_address_type_flag_range = buffer(offset,1)
     local jgroups_address_type_flag = addressTypeFlag(jgroups_address_type_flag_range:uint())
     subtree:add(f_jgroups_address_type_flag, jgroups_address_type_flag_range, jgroups_address_type_flag)
@@ -41,15 +41,15 @@ Util.writeAddress = function(buffer,pinfo,tree,offset)
     if jgroups_address_type_flag == "UUID_ADDR"
     or jgroups_address_type_flag == "SITE_MASTER" then
         UUID = require "util.UUID"
-        offset = UUID.writeTo(buffer,pinfo,tree,offset)
+        offset = UUID.writeTo(buffer,pinfo,subtree,offset)
     elseif jgroups_address_type_flag == "SITE_UUID" then
         SiteUUID = require "protocols.relay.SiteUUID"
-        offset = SiteUUID.writeTo(buffer,pinfo,tree,offset)
+        offset = SiteUUID.writeTo(buffer,pinfo,subtree,offset)
 
     elseif jgroups_address_type_flag == "IP_ADDR" then
 
         IpAddress = require "stack.IpAddress"
-        offset = IpAddress.writeTo(buffer,pinfo,tree,offset)
+        offset = IpAddress.writeTo(buffer,pinfo,subtree,offset)
 
     else
         offset = offset
@@ -62,7 +62,7 @@ end
 --------------------------------------------------
 -- writeAddresses --
 --------------------------------------------------
-Util.writeAddresses = function(buffer,pinfo,tree,offset)
+Util.writeAddresses = function(buffer,pinfo,subtree,offset)
     -- TODO
     local jgroups_member_size_range = buffer(offset,2)
     local jgroups_member_size = jgroups_member_size_range:uint()
@@ -74,7 +74,7 @@ Util.writeAddresses = function(buffer,pinfo,tree,offset)
         return offset
     else
         for i=1,tonumber(jgroups_member_size) do
-            offset = Util.writeAddress(buffer,pinfo,tree,offset)
+            offset = Util.writeAddress(buffer,pinfo,subtree,offset)
         end
     end
 
@@ -84,7 +84,7 @@ end
 --------------------------------------------------
 -- writeViewId --
 --------------------------------------------------
-Util.writeViewId = function(buffer,pinfo,tree,offset)
+Util.writeViewId = function(buffer,pinfo,subtree,offset)
     local jgroups_write_boolean_range = buffer(offset,1)
     local jgroups_write_boolean_b = jgroups_write_boolean_range:uint()
     local jgroups_write_boolean = Boolean(jgroups_write_boolean_b)
@@ -93,7 +93,7 @@ Util.writeViewId = function(buffer,pinfo,tree,offset)
     
     if jgroups_write_boolean == "True" then
         ViewId = require "ViewId"
-        offset = ViewId.writeTo(buffer,pinfo,tree,offset)
+        offset = ViewId.writeTo(buffer,pinfo,subtree,offset)
     end
 
     return offset
@@ -103,7 +103,7 @@ end
 --------------------------------------------------
 -- writeView --
 --------------------------------------------------
-Util.writeView = function(buffer,pinfo,tree,offset)
+Util.writeView = function(buffer,pinfo,subtree,offset)
 
     local jgroups_write_boolean_range = buffer(offset,1)
     local jgroups_write_boolean_b = jgroups_write_boolean_range:uint()
@@ -121,7 +121,7 @@ Util.writeView = function(buffer,pinfo,tree,offset)
         offset = offset + 1
 
         View = require "View"
-        offset = View.writeTo(buffer,pinfo,tree,offset)
+        offset = View.writeTo(buffer,pinfo,subtree,offset)
     end
 
     return offset
@@ -131,7 +131,7 @@ end
 --------------------------------------------------
 -- writeStreamable --
 --------------------------------------------------
-Util.writeStreamable = function(buffer,pinfo,tree,offset,obj)
+Util.writeStreamable = function(buffer,pinfo,subtree,offset,obj)
     local jgroups_write_boolean_range = buffer(offset,1)
     local jgroups_write_boolean_b = jgroups_write_boolean_range:uint()
     local jgroups_write_boolean = Boolean(jgroups_write_boolean_b)
@@ -140,7 +140,7 @@ Util.writeStreamable = function(buffer,pinfo,tree,offset,obj)
 
     if jgroups_write_boolean == "True" then
         protocol_data = require "protocols.protocol_data"
-        offset = protocol_data[obj](buffer,pinfo,tree,offset)
+        offset = protocol_data[obj](buffer,pinfo,subtree,offset)
     end
 
     return offset
@@ -150,7 +150,7 @@ end
 --------------------------------------------------
 -- writeString --
 --------------------------------------------------
-Util.writeString = function(buffer,pinfo,tree,offset)
+Util.writeString = function(buffer,pinfo,subtree,offset)
     local jgroups_byte_flag_range = buffer(offset,1)
     local jgroups_byte_flag_b = jgroups_byte_flag_range:uint()
     local jgroups_byte_flag   = Boolean(jgroups_byte_flag_b)
@@ -193,7 +193,7 @@ end
 --------------------------------------------------
 -- writeLongSequence --
 --------------------------------------------------
-Util.writeLongSequence = function(buffer,pinfo,tree,offset)
+Util.writeLongSequence = function(buffer,pinfo,subtree,offset)
 
     local jgroups_writeLong_needed_bytes_range = buffer(offset,1)
     local jgroups_writeLong_needed_bytes = decodeLength(jgroups_writeLong_needed_bytes_range:uint())
@@ -214,7 +214,7 @@ end
 --------------------------------------------------
 -- writeLong --
 --------------------------------------------------
-Util.writeLong = function(buffer,pinfo,tree,offset)
+Util.writeLong = function(buffer,pinfo,subtree,offset)
 
     local jgroups_writeLong_needed_bytes_range = buffer(offset,1)
     local jgroups_writeLong_needed_bytes = jgroups_writeLong_needed_bytes_range:uint()

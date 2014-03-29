@@ -27,7 +27,7 @@ Digest = {}
 --------------------------------------------------
 -- writeTo --
 --------------------------------------------------
-Digest.writeTo = function(buffer,pinfo,tree,offset)
+Digest.writeTo = function(buffer,pinfo,subtree,offset)
     Util = require "util.Util"
     local jgroups_messageDigest_size_range = buffer(offset,2)
     local jgroups_messageDigest_size = jgroups_messageDigest_size_range:uint()
@@ -35,11 +35,11 @@ Digest.writeTo = function(buffer,pinfo,tree,offset)
     offset = offset + 2
 
     for i=1,tonumber(jgroups_messageDigest_size) do
-        offset = Util.writeAddress(buffer,pinfo,tree,offset)
+        offset = Util.writeAddress(buffer,pinfo,subtree,offset)
     end
 
     for i=1,tonumber(jgroups_messageDigest_size) do
-        offset = Util.writeLongSequence(buffer,pinfo,tree,offset)
+        offset = Util.writeLongSequence(buffer,pinfo,subtree,offset)
     end
 
     return offset
