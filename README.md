@@ -9,7 +9,7 @@ Supported Version
 ---------------------------
 * JGroups 3.2.12 (which is included in JBoss EAP 6)
 
-See: `supported_version.lua`
+See: `jgroups-dissector/supported_version.lua`
 
 
 Environment
@@ -20,7 +20,7 @@ Environment
 
 Implemented protocols (still a work in progress)
 --------------------------
-See: `protocols/header_id_table.lua`
+See: `jgroups-dissector/protocols/header_id_table.lua`
 
 
 Enable the plugin
@@ -28,7 +28,7 @@ Enable the plugin
 
 **MEMO**: If you are not using wireshark 1.11.3, install it first. See the following Build and Install section.
 
-Just copy dissector files to your Wireshark global plugins directory.
+Just copy dissector files to your Wireshark personal plugins directory.
 
     cp -r jgroups-dissector /PATH/TO/YOUR/WIRESHARK/PERSONAL_PLUGIN/
     (eg. cp -r jgroups-dissector /home/knakayam/.wireshark/plugins/
